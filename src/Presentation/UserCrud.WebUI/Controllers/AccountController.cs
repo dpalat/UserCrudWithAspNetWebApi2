@@ -4,6 +4,7 @@ using Microsoft.Owin.Security;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using UserCrud.WebUI.Auth.Service;
 using UserCrud.WebUI.Models;
 
 namespace UserCrud.WebUI.Controllers

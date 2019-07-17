@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -21,9 +22,17 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Page 1", "Index", "Page1")</li>
-                    <li>@Html.ActionLink("Page 2", "Index", "Page2")</li>
-                    <li>@Html.ActionLink("Page 3", "Index", "Page3")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Page 1", "Index", "Page1")</li>
+                        <li>@Html.ActionLink("Page 2", "Index", "Page2")</li>
+                        <li>@Html.ActionLink("Page 3", "Index", "Page3")</li>
+
+                        if (User.IsInRole(UserCrud.WebUI.Auth.Service.RoleName.ADMIN))
+                        {
+                            <li>@Html.ActionLink("Admin", "Index", "UsersDirectoryAdmin")</li>
+                        }
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

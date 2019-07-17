@@ -1,11 +1,11 @@
 ﻿using System.Web.Mvc;
+using UserCrud.WebUI.Auth.Service;
 
 namespace UserCrud.WebUI.Controllers
 {
-    [Authorize]
+    [AuthorizeRoles(RoleName.PAGE1, RoleName.ADMIN)]
     public class Page1Controller : Controller
     {
-        // GET: Page1
         public ActionResult Index()
         {
             return View();

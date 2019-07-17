@@ -29,4 +29,12 @@ namespace UserCrud.WebUI.Models
             return new ApplicationDbContext();
         }
     }
+
+    public class ApplicationRole : IdentityRole
+    {
+    }
+
+    public class ApplicationUserRole : IdentityUserRole
+    {
+    }
 }

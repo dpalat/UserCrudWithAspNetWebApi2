@@ -3,10 +3,9 @@ using UserCrud.WebUI.Auth.Service;
 
 namespace UserCrud.WebUI.Controllers
 {
-    [AuthorizeRoles(RoleName.PAGE2, RoleName.ADMIN)]
-    public class Page2Controller : Controller
+    [Authorize(Roles = RoleName.ADMIN)]
+    public class UsersDirectoryAdminController : Controller
     {
-        
         public ActionResult Index()
         {
             return View();

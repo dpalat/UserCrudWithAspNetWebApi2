@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using UserCrud.WebUI.Auth.Service;
 using UserCrud.WebUI.Models;
 
 namespace UserCrud.WebUI.Controllers
@@ -68,7 +68,6 @@ namespace UserCrud.WebUI.Controllers
             return View(model);
         }
 
-
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
@@ -99,7 +98,6 @@ namespace UserCrud.WebUI.Controllers
             AddErrors(result);
             return View(model);
         }
-
 
         protected override void Dispose(bool disposing)
         {

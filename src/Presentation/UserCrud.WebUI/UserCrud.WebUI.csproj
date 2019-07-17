@@ -169,18 +169,32 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Auth.Service\ApplicationRoleManager.cs" />
+    <Compile Include="Auth.Service\ApplicationSignInManager.cs" />
+    <Compile Include="Auth.Service\ApplicationUserManager.cs" />
+    <Compile Include="Auth.Service\AuthorizeRolesAttribute.cs" />
+    <Compile Include="Auth.Service\RoleName.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\Page1Controller.cs" />
     <Compile Include="Controllers\Page2Controller.cs" />
     <Compile Include="Controllers\Page3Controller.cs" />
+    <Compile Include="Controllers\UsersDirectoryAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907161904319_InitialCreate.cs" />
+    <Compile Include="Migrations\201907161904319_InitialCreate.Designer.cs">
+      <DependentUpon>201907161904319_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907162215194_Initial.cs" />
+    <Compile Include="Migrations\201907162215194_Initial.Designer.cs">
+      <DependentUpon>201907162215194_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -245,6 +259,8 @@
     <Content Include="Views\Page1\Index.cshtml" />
     <Content Include="Views\Page2\Index.cshtml" />
     <Content Include="Views\Page3\Index.cshtml" />
+    <Content Include="Views\UsersDirectoryAdmin\Index.cshtml" />
+    <Content Include="Views\Shared\Forbidden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -264,6 +280,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201907161904319_InitialCreate.resx">
+      <DependentUpon>201907161904319_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907162215194_Initial.resx">
+      <DependentUpon>201907162215194_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
