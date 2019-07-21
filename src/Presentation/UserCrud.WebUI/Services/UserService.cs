@@ -52,5 +52,10 @@ namespace UserCrud.WebUI.Services
 
             return userDtoUpdated;
         }
+
+        public async Task DeleteAsync(string id)
+        {
+            await _httpClient.DeleteAsync($"Users/{id}");
+        }
     }
 }

@@ -44,5 +44,11 @@ namespace UserCrud.WebApi.Controllers
 
             return userDtoUpdated;
         }
+
+        [HttpDelete]
+        public void Delete(string id)
+        {
+            _usersDomain.Delete(new Guid(id));
+        }
     }
 }

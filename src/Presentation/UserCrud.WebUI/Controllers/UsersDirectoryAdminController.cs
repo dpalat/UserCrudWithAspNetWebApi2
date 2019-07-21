@@ -49,6 +49,16 @@ namespace UserCrud.WebUI.Controllers
             return View(userViewModel);
         }
 
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                return HttpNotFound();
+
+            await _userService.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
         private UserDto Map(UserDetailViewModel userViewModel)
         {
             var roles = userViewModel.Roles.Split(',').ToList();

@@ -32,5 +32,10 @@ namespace UserCrud.Domain
 
             return user;
         }
+
+        public void Delete(Guid Id)
+        {
+            _userRepository.Delete(Id);
+        }
     }
 }

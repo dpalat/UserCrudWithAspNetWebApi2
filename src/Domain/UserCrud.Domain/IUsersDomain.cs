@@ -9,5 +9,6 @@ namespace UserCrud.Domain
         IEnumerable<User> GetAll();
         User Get(Guid Id);
         User Update(User usetDto);
+        void Delete(Guid Id);
     }
 }
