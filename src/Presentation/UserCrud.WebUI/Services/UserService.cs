@@ -8,7 +8,7 @@ using UserCrud.WebUI.Dtos;
 
 namespace UserCrud.WebUI.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private HttpClient _httpClient = new HttpClient();
 

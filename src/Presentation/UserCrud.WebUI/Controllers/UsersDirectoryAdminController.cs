@@ -13,7 +13,12 @@ namespace UserCrud.WebUI.Controllers
     [Authorize(Roles = RoleName.ADMIN)]
     public class UsersDirectoryAdminController : Controller
     {
-        private readonly UserService _userService = new UserService();
+        private readonly IUserService _userService;
+
+        public UsersDirectoryAdminController(IUserService userService)
+        {
+            _userService = userService;
+        }
 
         public async Task<ActionResult> Index()
         {
@@ -57,7 +62,6 @@ namespace UserCrud.WebUI.Controllers
             await _userService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
 
         private UserDto Map(UserDetailViewModel userViewModel)
         {

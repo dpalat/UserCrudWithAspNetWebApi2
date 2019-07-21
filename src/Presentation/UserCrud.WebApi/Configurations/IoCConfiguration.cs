@@ -7,7 +7,7 @@ using UserCrud.Domain.DefaultData;
 using UserCrud.WebApi.Configurations;
 using UsersCrud.Repository;
 
-namespace UserCrud.WebApi
+namespace UserCrud.WebApi.Configurations
 {
     public static class IoCConfiguration
     {

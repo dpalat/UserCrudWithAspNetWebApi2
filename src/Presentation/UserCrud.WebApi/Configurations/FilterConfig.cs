@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace UserCrud.WebUI
+namespace UserCrud.WebApi.Configurations
 {
     public class FilterConfig
     {

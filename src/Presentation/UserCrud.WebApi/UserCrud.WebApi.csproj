@@ -158,11 +158,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IoCConfiguration.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Configurations\AutomapperDomainProfile.cs" />
+    <Compile Include="Configurations\BundleConfig.cs" />
+    <Compile Include="Configurations\FilterConfig.cs" />
+    <Compile Include="Configurations\IoCConfiguration.cs" />
+    <Compile Include="Configurations\WebApiConfig.cs" />
+    <Compile Include="Configurations\AutomapperWebApiProfile.cs" />
     <Compile Include="Configurations\AutoMapperInstaller.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Start\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

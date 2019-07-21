@@ -4,9 +4,9 @@ using UserCrud.WebApi.Dtos;
 
 namespace UserCrud.WebApi.Configurations
 {
-    public class AutomapperDomainProfile : Profile
+    public class AutomapperWebApiProfile : Profile
     {
-        public AutomapperDomainProfile()
+        public AutomapperWebApiProfile()
         {
             CreateMap<User, UserDto>();
             CreateMap<UserDto, User>();

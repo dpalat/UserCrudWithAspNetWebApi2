@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace UserCrud.WebApi
+namespace UserCrud.WebApi.Configurations
 {
     public static class WebApiConfig
     {
