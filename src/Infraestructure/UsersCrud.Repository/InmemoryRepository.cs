@@ -20,7 +20,7 @@ namespace UsersCrud.Repository
 
         public void Save(T item)
         {
-            if (_store.Any(e => e.Equals(item)))
+            if (_store.Any(e => e.Id == item.Id))
                 Delete(item.Id);
 
             _store.Add(item);

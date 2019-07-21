@@ -10,7 +10,12 @@ namespace UserCrud.WebUI.ViewModels
         [Required]
         [Display(Name = "E-mail")]
         [EmailAddress]
-        public string Email { get; set; }
+        public string UserEmail { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
 
         [Display(Name = "Roles")]
         public string Roles { get; set; }

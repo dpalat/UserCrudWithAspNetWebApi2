@@ -9,6 +9,7 @@ namespace UserCrud.WebApi.Configurations
         public AutomapperDomainProfile()
         {
             CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
         }
     }
 }

@@ -21,27 +21,29 @@ namespace UserCrud.Domain.DefaultData
             userRepository.Save(BuildUser("2", role2));
             userRepository.Save(BuildUser("2", role3));
 
-            userRepository.Save(BuildUser("DarthVader", roleAdmin.Union(role1).Union(role2).ToList()));
-            userRepository.Save(BuildUser("LeiaOrgana", role1.Union(role2).ToList()));
-            userRepository.Save(BuildUser("LukeSkywalker", role3.Union(role1).ToList()));
+            userRepository.Save(BuildUser("Darth Vader", roleAdmin.Union(role1).Union(role2).ToList()));
+            userRepository.Save(BuildUser("Leia Organa", role1.Union(role2).ToList()));
+            userRepository.Save(BuildUser("Luke Skywalker", role3.Union(role1).ToList()));
             userRepository.Save(BuildUser("Chewbacca", role1.Union(role2).ToList()));
-            userRepository.Save(BuildUser("Obi_Wan_Kenobi", role1.Union(role2).Union(role3).ToList()));
+            userRepository.Save(BuildUser("Obi Wan Kenobi", role1.Union(role2).Union(role3).ToList()));
             userRepository.Save(BuildUser("Yoda", roleAdmin));
             userRepository.Save(BuildUser("C3PO", role3));
-            userRepository.Save(BuildUser("BobaFett", role1.Union(role3).ToList()));
-            userRepository.Save(BuildUser("HanSolo", role3));
+            userRepository.Save(BuildUser("Boba Fett", role1.Union(role3).ToList()));
+            userRepository.Save(BuildUser("Han Solo", role3));
             userRepository.Save(BuildUser("Palpatine", roleAdmin));
             userRepository.Save(BuildUser("R2D2", role2.Union(role3).ToList()));
         }
 
-        private User BuildUser(string userName, List<string> roles)
+        private User BuildUser(string name, List<string> roles)
         {
+            var sanitizeName = name.Replace(" ", "");
             return new User
             {
                 Id = Guid.NewGuid(),
                 Roles = roles,
-                UserEmail = $"{userName}@user.com",
-                UserName = $"{userName}@user.com"
+                Name = name,
+                UserEmail = $"{sanitizeName}@user.com",
+                UserName = $"{sanitizeName}@user.com"
             };
         }
     }

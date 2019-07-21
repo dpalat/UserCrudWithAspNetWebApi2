@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using UserCrud.WebUI.Dtos;
 
@@ -10,9 +12,16 @@ namespace UserCrud.WebUI.Services
     {
         private HttpClient _httpClient = new HttpClient();
 
+        public UserService()
+        {
+            _httpClient.BaseAddress = new Uri("http://localhost:50000/api/");
+            _httpClient.DefaultRequestHeaders.Accept.Add(
+               new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
         public async Task<List<UserDto>> GetAllUsers()
         {
-            var response = await _httpClient.GetAsync("http://localhost:50000/api/Users");
+            var response = await _httpClient.GetAsync("Users");
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode) return null;
@@ -24,13 +33,24 @@ namespace UserCrud.WebUI.Services
 
         public async Task<UserDto> GetAsync(string id)
         {
-            var response = await _httpClient.GetAsync($"http://localhost:50000/api/Users/{id}");
+            var response = await _httpClient.GetAsync($"Users/{id}");
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
             var userDto = JsonConvert.DeserializeObject<UserDto>(jsonResponse);
 
             return userDto;
+        }
+
+        public async Task<UserDto> Update(UserDto userDto)
+        {
+            var response = await _httpClient.PutAsJsonAsync($"Users/{userDto.Id}", userDto);
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            var userDtoUpdated = JsonConvert.DeserializeObject<UserDto>(jsonResponse);
+
+            return userDtoUpdated;
         }
     }
 }
