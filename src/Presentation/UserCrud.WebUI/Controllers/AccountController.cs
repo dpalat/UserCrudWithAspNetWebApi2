@@ -17,9 +17,9 @@ namespace UserCrud.WebUI.Controllers
         private UserManager<ApplicationUser> _applicationUserManager;
         private AuthenticationService _authenticationService;
 
-        public AccountController()
+        public AccountController(AuthenticationService authenticationService)
         {
-            _authenticationService = new AuthenticationService();
+            _authenticationService = authenticationService;
             _applicationUserManager = new UserManager<ApplicationUser>(new ApplicationUserStore());
         }
 

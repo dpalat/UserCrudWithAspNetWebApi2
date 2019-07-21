@@ -10,13 +10,11 @@ namespace UserCrud.WebUI.Services
 {
     public class UserService : IUserService
     {
-        private HttpClient _httpClient = new HttpClient();
+        private HttpClient _httpClient;
 
-        public UserService()
+        public UserService(HttpClient httpClient)
         {
-            _httpClient.BaseAddress = new Uri("http://localhost:50000/api/");
-            _httpClient.DefaultRequestHeaders.Accept.Add(
-               new MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient = httpClient;
         }
 
         public async Task<List<UserDto>> GetAllUsersAsync()

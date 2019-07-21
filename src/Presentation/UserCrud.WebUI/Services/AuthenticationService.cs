@@ -14,11 +14,12 @@ namespace UserCrud.WebUI.Services
 {
     public class AuthenticationService
     {
-        private HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient;
         private UserManager<ApplicationUser> _applicationUserManager;
 
-        public AuthenticationService()
+        public AuthenticationService(HttpClient httpClient)
         {
+            _httpClient = httpClient;
             _applicationUserManager = new UserManager<ApplicationUser>(new ApplicationUserStore());
         }
 
@@ -28,9 +29,9 @@ namespace UserCrud.WebUI.Services
 
             var data = new { UserName = email, Password = password };
             var json = JsonConvert.SerializeObject(data);
-            var stringContent = new StringContent(json, UnicodeEncoding.UTF8, "application/json");
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("http://localhost:50000/api/Security/LogIn", stringContent);
+            var response = await _httpClient.PostAsync("Security/LogIn", stringContent);
             var jsonResponse = await response.Content.ReadAsStringAsync();
 
             var userDto = JsonConvert.DeserializeObject<UserDto>(jsonResponse);

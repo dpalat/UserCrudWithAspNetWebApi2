@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using System;
+using System.Net.Http;
 using System.Reflection;
 using System.Web.Mvc;
 using UserCrud.WebUI.Services;
@@ -13,16 +15,9 @@ namespace UserCrud.WebUI.Configurations
             var builder = new ContainerBuilder();
             var container = RegisterServices(builder);
 
-            // Set the dependency resolver for MVC.
             var mvcResolver = new AutofacDependencyResolver(container);
             DependencyResolver.SetResolver(mvcResolver);
-
-            //configuration.DependencyResolver = new AutofacWebApiDependencyResolver(
-            //    RegisterServices(new ContainerBuilder())
-            //);
-            //return container;
         }
-
 
         private static IContainer RegisterServices(ContainerBuilder builder)
         {
@@ -37,6 +32,11 @@ namespace UserCrud.WebUI.Configurations
                 .PropertiesAutowired();
 
             builder.RegisterType<UserService>().As<IUserService>();
+
+            builder.Register(ctx => new HttpClient()
+            {
+                BaseAddress = new Uri("http://localhost:50000/api/")
+            }).As<HttpClient>().SingleInstance();
 
             builder.RegisterModule(new AutoMapperInstaller());
             return builder.Build();
