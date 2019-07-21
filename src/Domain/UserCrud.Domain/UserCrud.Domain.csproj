@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultData\SeedUser.cs" />
+    <Compile Include="DefaultData\ISeedUser.cs" />
     <Compile Include="IUsersDomain.cs" />
     <Compile Include="UsersDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

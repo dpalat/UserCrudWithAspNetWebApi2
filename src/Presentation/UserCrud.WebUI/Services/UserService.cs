@@ -15,6 +15,7 @@ namespace UserCrud.WebUI.Services
             var response = await _httpClient.GetAsync("http://localhost:50000/api/Users");
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode) return null;
 
             var usersDto = JsonConvert.DeserializeObject<List<UserDto>>(jsonResponse);
 

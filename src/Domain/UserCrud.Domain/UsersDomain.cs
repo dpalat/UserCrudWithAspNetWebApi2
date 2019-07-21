@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UserCrud.Domain.DefaultData;
 using UserCrud.Entity;
 using UsersCrud.Repository;
 
@@ -9,9 +9,10 @@ namespace UserCrud.Domain
     {
         private readonly IRepository<User> _userRepository;
 
-        public UsersDomain(IRepository<User> userRepository)
+        public UsersDomain(IRepository<User> userRepository, ISeedUser seedUser)
         {
             _userRepository = userRepository;
+            seedUser.Seed(_userRepository);
         }
 
         public IEnumerable<User> GetAll()

@@ -3,6 +3,8 @@ using Autofac.Integration.WebApi;
 using System.Reflection;
 using System.Web.Http;
 using UserCrud.Domain;
+using UserCrud.Domain.DefaultData;
+using UserCrud.WebApi.Configurations;
 using UsersCrud.Repository;
 
 namespace UserCrud.WebApi
@@ -25,15 +27,15 @@ namespace UserCrud.WebApi
         {
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).PropertiesAutowired();
 
-            //builder
-            //    .RegisterGeneric(typeof(IRepository<>)).AsSelf();
             builder
                 .RegisterGeneric(typeof(InMemoryRepository<>))
                 .As(typeof(IRepository<>))
                 .InstancePerDependency();
 
-            builder.RegisterType<UsersDomain>().As<IUsersDomain>();
+            builder.RegisterType<UsersDomain>().As<IUsersDomain>().SingleInstance();
+            builder.RegisterType<SeedUser>().As<ISeedUser>();
 
+            builder.RegisterModule(new AutoMapperInstaller());
             return builder.Build();
         }
     }

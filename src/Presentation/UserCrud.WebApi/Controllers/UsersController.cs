@@ -1,4 +1,4 @@
-﻿using System;
+﻿using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -9,25 +9,23 @@ namespace UserCrud.WebApi.Controllers
 {
     public class UsersController : ApiController
     {
-        private IUsersDomain _usersDomain;
+        private readonly IUsersDomain _usersDomain;
+        private readonly IMapper _mapper;
 
-        public UsersController(IUsersDomain usersDomain)
+        public UsersController(IUsersDomain usersDomain, IMapper mapper)
         {
             _usersDomain = usersDomain;
+            _mapper = mapper;
         }
 
         // GET: api/Users
         public IEnumerable<UserDto> Get()
         {
-            _usersDomain.GetAll();
-            var users = new List<UserDto>();
-            var baseRoles1 = new List<string> { "PAGE_1", "PAGE_2" };
-            var baseRoles2 = new List<string> { "ADMIN", "PAGE_2" };
-            users.Add(new UserDto { Id = Guid.NewGuid(), Roles = baseRoles1, UserEmail = "1@gmail.com", UserName = "1@gmail.com" });
-            users.Add(new UserDto { Id = Guid.NewGuid(), Roles = baseRoles1, UserEmail = "2@gmail.com", UserName = "2@gmail.com" });
-            users.Add(new UserDto { Id = Guid.NewGuid(), Roles = baseRoles2, UserEmail = "3@gmail.com", UserName = "3@gmail.com" });
-            users.Add(new UserDto { Id = Guid.NewGuid(), Roles = baseRoles2, UserEmail = "4@gmail.com", UserName = "4@gmail.com" });
-            return users;
+            var users = _usersDomain.GetAll();
+
+            var usersDto = _mapper.Map<IEnumerable<Entity.User>, IEnumerable<UserDto>>(users);
+
+            return usersDto;
         }
 
         // GET: api/Users/5
