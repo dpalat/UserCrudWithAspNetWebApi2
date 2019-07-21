@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using UserCrud.WebUI.Models;
 using UserCrud.WebUI.Models.Identity;
 using UserCrud.WebUI.Services;
+using UserCrud.WebUI.ViewModels;
 
 namespace UserCrud.WebUI.Controllers
 {
