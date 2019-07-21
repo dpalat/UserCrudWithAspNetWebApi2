@@ -28,7 +28,7 @@
                         <li>@Html.ActionLink("Page 2", "Index", "Page2")</li>
                         <li>@Html.ActionLink("Page 3", "Index", "Page3")</li>
 
-                        if (User.IsInRole(UserCrud.WebUI.Auth.Service.RoleName.ADMIN))
+                        if (User.IsInRole(UserCrud.WebUI.Constants.RoleName.ADMIN))
                         {
                             <li>@Html.ActionLink("Admin", "Index", "UsersDirectoryAdmin")</li>
                         }

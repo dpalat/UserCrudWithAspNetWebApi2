@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace UserCrud.WebUI.Auth.Service
+﻿namespace UserCrud.WebUI.Constants
 {
     public class RoleName
     {
@@ -11,6 +6,5 @@ namespace UserCrud.WebUI.Auth.Service
         public const string PAGE2 = "PAGE_2";
         public const string PAGE3 = "PAGE_3";
         public const string ADMIN = "ADMIN";
-
     }
 }

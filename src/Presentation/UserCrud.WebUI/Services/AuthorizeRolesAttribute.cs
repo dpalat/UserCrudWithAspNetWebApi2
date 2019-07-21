@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace UserCrud.WebUI.Auth.Service
+namespace UserCrud.WebUI.Services
 {
     public class AuthorizeRolesAttribute : AuthorizeAttribute
     {
@@ -21,7 +21,6 @@ namespace UserCrud.WebUI.Auth.Service
             }
             else
             {
-                //else do normal process
                 base.HandleUnauthorizedRequest(filterContext);
             }
         }

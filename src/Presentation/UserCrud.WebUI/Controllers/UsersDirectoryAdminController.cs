@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using UserCrud.WebUI.Auth.Service;
+using UserCrud.WebUI.Constants;
 
 namespace UserCrud.WebUI.Controllers
 {
