@@ -260,7 +260,6 @@
     <Content Include="Views\Page2\Index.cshtml" />
     <Content Include="Views\Page3\Index.cshtml" />
     <Content Include="Views\Shared\Forbidden.cshtml" />
-    <Content Include="Views\UsersDirectoryAdmin\__Edit.cshtml" />
     <Content Include="Views\UsersDirectoryAdmin\Index.cshtml" />
     <Content Include="Views\UsersDirectoryAdmin\Edit.cshtml" />
   </ItemGroup>
