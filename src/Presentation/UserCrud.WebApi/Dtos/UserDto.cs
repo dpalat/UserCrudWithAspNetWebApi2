@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UserCrud.WebApi.Models
+namespace UserCrud.WebApi.Dtos
 {
     public class UserDto
     {
