@@ -126,7 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
-    <Compile Include="Dtos\LogInDto.cs" />
+    <Compile Include="Dtos\LoginDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
