@@ -8,7 +8,8 @@ namespace UserCrud.Domain
     {
         IEnumerable<User> GetAll();
         User Get(Guid Id);
-        User Update(User usetDto);
+        User Update(User user);
+        User Create(User user);
         void Delete(Guid Id);
     }
 }

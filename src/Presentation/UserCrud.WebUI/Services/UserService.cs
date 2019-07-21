@@ -19,7 +19,7 @@ namespace UserCrud.WebUI.Services
                new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<List<UserDto>> GetAllUsers()
+        public async Task<List<UserDto>> GetAllUsersAsync()
         {
             var response = await _httpClient.GetAsync("Users");
 
@@ -42,7 +42,7 @@ namespace UserCrud.WebUI.Services
             return userDto;
         }
 
-        public async Task<UserDto> Update(UserDto userDto)
+        public async Task<UserDto> UpdateAsync(UserDto userDto)
         {
             var response = await _httpClient.PutAsJsonAsync($"Users/{userDto.Id}", userDto);
 
@@ -56,6 +56,17 @@ namespace UserCrud.WebUI.Services
         public async Task DeleteAsync(string id)
         {
             await _httpClient.DeleteAsync($"Users/{id}");
+        }
+
+        public async Task<UserDto> CreateAsync(UserDto userDto)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"Users", userDto);
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            var userDtoUpdated = JsonConvert.DeserializeObject<UserDto>(jsonResponse);
+
+            return userDtoUpdated;
         }
     }
 }

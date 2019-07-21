@@ -50,5 +50,17 @@ namespace UserCrud.WebApi.Controllers
         {
             _usersDomain.Delete(new Guid(id));
         }
+
+        [HttpPost]
+        public UserDto Create(UserDto userDto)
+        {
+            var user = _mapper.Map<UserDto, Entity.User>(userDto);
+
+            var userCreated = _usersDomain.Create(user);
+
+            var userDtoCreated = _mapper.Map<Entity.User, UserDto>(userCreated);
+
+            return userDtoCreated;
+        }
     }
 }

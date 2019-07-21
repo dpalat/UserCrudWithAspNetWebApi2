@@ -37,5 +37,12 @@ namespace UserCrud.Domain
         {
             _userRepository.Delete(Id);
         }
+
+        public User Create(User user)
+        {
+            _userRepository.Save(user);
+
+            return user;
+        }
     }
 }

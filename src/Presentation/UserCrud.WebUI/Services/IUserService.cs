@@ -9,9 +9,10 @@ namespace UserCrud.WebUI.Services
 {
     public interface IUserService
     {
-        Task<List<UserDto>> GetAllUsers();
+        Task<List<UserDto>> GetAllUsersAsync();
         Task<UserDto> GetAsync(string id);
-        Task<UserDto> Update(UserDto userDto);
+        Task<UserDto> UpdateAsync(UserDto userDto);
+        Task<UserDto> CreateAsync(UserDto userDto);
         Task DeleteAsync(string id);
     }
 }

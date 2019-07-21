@@ -23,6 +23,8 @@ namespace UsersCrud.Repository
             if (_store.Any(e => e.Id == item.Id))
                 Delete(item.Id);
 
+            if (item.Id == Guid.Empty) item.Id = Guid.NewGuid();
+
             _store.Add(item);
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -22,7 +21,7 @@ namespace UserCrud.WebUI.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var usersDto = await _userService.GetAllUsers();
+            var usersDto = await _userService.GetAllUsersAsync();
 
             var viewModel = new List<UserDetailViewModel>();
             foreach (var userDto in usersDto)
@@ -48,13 +47,12 @@ namespace UserCrud.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 var userDto = Map(userViewModel);
-                await _userService.Update(userDto);
+                await _userService.UpdateAsync(userDto);
                 return RedirectToAction(nameof(Index));
             }
             return View(userViewModel);
         }
 
-        
         public async Task<ActionResult> Details(string id)
         {
             if (string.IsNullOrWhiteSpace(id)) return HttpNotFound();
@@ -74,13 +72,30 @@ namespace UserCrud.WebUI.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(UserDetailViewModel userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userDto = Map(userViewModel);
+                await _userService.CreateAsync(userDto);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(userViewModel);
+        }
+
         private UserDto Map(UserDetailViewModel userViewModel)
         {
             var roles = userViewModel.Roles.Split(',').ToList();
 
             return new UserDto
             {
-                Id = new Guid(userViewModel.Id),
+                Id = userViewModel.Id,
                 UserEmail = userViewModel.UserEmail,
                 UserName = userViewModel.UserEmail,
                 Name = userViewModel.Name,
@@ -93,7 +108,7 @@ namespace UserCrud.WebUI.Controllers
             var roles = string.Join(",", userDto.Roles);
             return new UserDetailViewModel
             {
-                Id = userDto.Id.ToString(),
+                Id = userDto.Id,
                 UserEmail = userDto.UserEmail,
                 Name = userDto.Name,
                 Roles = roles
