@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using UserCrud.Domain;
 using UserCrud.WebApi.Dtos;
 
 namespace UserCrud.WebApi.Controllers
 {
     public class UsersController : ApiController
     {
+        private IUsersDomain _usersDomain;
+
+        public UsersController(IUsersDomain usersDomain)
+        {
+            _usersDomain = usersDomain;
+        }
+
         // GET: api/Users
         public IEnumerable<UserDto> Get()
         {
+            _usersDomain.GetAll();
             var users = new List<UserDto>();
             var baseRoles1 = new List<string> { "PAGE_1", "PAGE_2" };
             var baseRoles2 = new List<string> { "ADMIN", "PAGE_2" };

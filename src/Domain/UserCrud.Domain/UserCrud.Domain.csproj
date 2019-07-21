@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IUsersDomain.cs" />
     <Compile Include="UsersDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -48,6 +49,10 @@
     <ProjectReference Include="..\..\Infraestructure\UsersCrud.Repository\UsersCrud.Repository.csproj">
       <Project>{713af0fb-4d75-4feb-b95d-bd6b511be7ae}</Project>
       <Name>UsersCrud.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserCrud.Entity\UserCrud.Entity.csproj">
+      <Project>{c08373ca-2ee4-4dd0-b4a7-2c3a892ba0e5}</Project>
+      <Name>UserCrud.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

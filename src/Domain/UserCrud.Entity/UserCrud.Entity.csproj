@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{713AF0FB-4D75-4FEB-B95D-BD6B511BE7AE}</ProjectGuid>
+    <ProjectGuid>{C08373CA-2EE4-4DD0-B4A7-2C3A892BA0E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UsersCrud.Repository</RootNamespace>
-    <AssemblyName>UsersCrud.Repository</AssemblyName>
+    <RootNamespace>UserCrud.Entity</RootNamespace>
+    <AssemblyName>UserCrud.Entity</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,10 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InMemoryRepository.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="ISearchable.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infraestructure\UsersCrud.Repository\UsersCrud.Repository.csproj">
+      <Project>{713af0fb-4d75-4feb-b95d-bd6b511be7ae}</Project>
+      <Name>UsersCrud.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
