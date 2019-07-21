@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsersCrud.Repository", "Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserCrud.Entity", "Domain\UserCrud.Entity\UserCrud.Entity.csproj", "{C08373CA-2EE4-4DD0-B4A7-2C3A892BA0E5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Test", "4. Test", "{567C62CB-F11A-4158-9192-F31152DBFF2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsersCrud.Repository.UnitTest", "Test\UsersCrud.Repository.UnitTest\UsersCrud.Repository.UnitTest.csproj", "{8393EAF9-DFEF-467C-BB88-38F3CD741DAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{C08373CA-2EE4-4DD0-B4A7-2C3A892BA0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C08373CA-2EE4-4DD0-B4A7-2C3A892BA0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C08373CA-2EE4-4DD0-B4A7-2C3A892BA0E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8393EAF9-DFEF-467C-BB88-38F3CD741DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8393EAF9-DFEF-467C-BB88-38F3CD741DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8393EAF9-DFEF-467C-BB88-38F3CD741DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8393EAF9-DFEF-467C-BB88-38F3CD741DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{E6DD76EC-EB6B-456B-BA9C-1F2474CCA01A} = {EF54CD28-CE84-4AA6-B6AD-0E53334BE91E}
 		{713AF0FB-4D75-4FEB-B95D-BD6B511BE7AE} = {A1A54E70-62A9-4A40-B82A-EACBB1ADE704}
 		{C08373CA-2EE4-4DD0-B4A7-2C3A892BA0E5} = {EF54CD28-CE84-4AA6-B6AD-0E53334BE91E}
+		{8393EAF9-DFEF-467C-BB88-38F3CD741DAF} = {567C62CB-F11A-4158-9192-F31152DBFF2F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B7A3CEE-2DF0-4E2C-8A98-D7F4C8680F99}
