@@ -54,6 +54,17 @@ namespace UserCrud.WebUI.Controllers
             return View(userViewModel);
         }
 
+        
+        public async Task<ActionResult> Details(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id)) return HttpNotFound();
+
+            var userDto = await _userService.GetAsync(id);
+            if (userDto == null) return HttpNotFound();
+
+            return View(Map(userDto));
+        }
+
         public async Task<ActionResult> Delete(string id)
         {
             if (string.IsNullOrWhiteSpace(id))

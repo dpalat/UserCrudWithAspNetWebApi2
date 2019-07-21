@@ -275,6 +275,7 @@
     <Content Include="Views\Shared\Forbidden.cshtml" />
     <Content Include="Views\UsersDirectoryAdmin\Index.cshtml" />
     <Content Include="Views\UsersDirectoryAdmin\Edit.cshtml" />
+    <Content Include="Views\UsersDirectoryAdmin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
