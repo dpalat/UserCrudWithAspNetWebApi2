@@ -15,7 +15,7 @@ In this proyect you can see how to connect a ASP.NET MVC 5 with ASP.NET WebAPI2 
 - ASP.NET MVC 5
 - ASP.NET WebApi 2
 - .NET Framework 4.7
-- CodeMaid (Visual Studio plugin)
+- CodeMaid (Visual Studio pluging) (http://www.codemaid.net/) 
 - OpenCove + ReportGenerator.
 - System.HTTP Default Content Negotiation
 - Moq (https://github.com/moq/moq)
@@ -109,7 +109,7 @@ Visual Studio don't include native tool for view the Code Coverage in Community 
 
 
 You can run coverage executing ```CoverageTest.bat``` file which is in the solution.
-<img src="https://github.com/dpalat/UserCrudWithAspNetWebApi2/blob/Feature-01/Documentation/CoverageBat.png" width="600px" />
+<img src="https://github.com/dpalat/UserCrudWithAspNetWebApi2/blob/Feature-01/Documentation/CoverageBat.png" width="400px" />
 
 
 ## Store
