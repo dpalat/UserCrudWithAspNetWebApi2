@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using System;
+using System.Configuration;
 using System.Net.Http;
 using System.Reflection;
 using System.Web.Mvc;
@@ -21,21 +22,19 @@ namespace UserCrud.WebUI.Configurations
 
         private static IContainer RegisterServices(ContainerBuilder builder)
         {
-            //mvc
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
             builder.RegisterModelBinders(Assembly.GetExecutingAssembly());
             builder.RegisterModelBinderProvider();
 
-            //others
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
                 .PropertiesAutowired();
 
             builder.RegisterType<UserService>().As<IUserService>();
-
+            string urlWebAPI = ConfigurationManager.AppSettings["UrlWebAPI"];
             builder.Register(ctx => new HttpClient()
             {
-                BaseAddress = new Uri("http://localhost:50000/api/")
+                BaseAddress = new Uri(urlWebAPI)
             }).As<HttpClient>().SingleInstance();
 
             builder.RegisterModule(new AutoMapperInstaller());

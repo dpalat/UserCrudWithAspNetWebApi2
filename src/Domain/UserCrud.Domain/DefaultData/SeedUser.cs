@@ -27,7 +27,7 @@ namespace UserCrud.Domain.DefaultData
 
             userRepository.Save(BuildUser("1", role1));
             userRepository.Save(BuildUser("2", role2));
-            userRepository.Save(BuildUser("2", role3));
+            userRepository.Save(BuildUser("3", role3));
 
             userRepository.Save(BuildUser("Darth Vader", roleAdmin.Union(role1).Union(role2).ToList()));
             userRepository.Save(BuildUser("Leia Organa", role1.Union(role2).ToList()));
