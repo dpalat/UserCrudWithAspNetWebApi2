@@ -20,5 +20,10 @@ namespace UserCrud.WebUI.ViewModels
 
         [Display(Name = "Roles")]
         public string Roles { get; set; }
+
+        public bool CanDelete()
+        {
+            return System.Web.HttpContext.Current.User.Identity.Name != UserEmail;
+        }
     }
 }
