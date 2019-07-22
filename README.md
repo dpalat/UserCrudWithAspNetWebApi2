@@ -108,6 +108,10 @@ And one super admin Role:
 Visual Studio don't include native tool for view the Code Coverage in Community Edition and OpenCover and ReporGenerator is a good alternative. 
 
 
+You can run coverage executing ```CoverageTest.bat``` file which is in the solution.
+<img src="https://github.com/dpalat/UserCrudWithAspNetWebApi2/blob/Feature-01/Documentation/CoverageBat.png" width="600px" />
+
+
 ## Store
 
 This example is build with a In Memory store, which is a simple clases, keep in mind because if you restart the application you will lost your users :).

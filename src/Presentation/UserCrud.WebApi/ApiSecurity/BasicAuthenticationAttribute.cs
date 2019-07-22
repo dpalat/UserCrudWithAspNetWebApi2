@@ -73,7 +73,7 @@ namespace UserCrud.WebApi.ApiSecurity
 
                 if (!IsRolePermissionOk(user.Roles))
                 {
-                    actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
+                    actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Forbidden);
                     return;
                 }
 

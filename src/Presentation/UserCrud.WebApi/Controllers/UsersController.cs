@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
@@ -50,14 +51,20 @@ namespace UserCrud.WebApi.Controllers
             };
         }
 
-        public UserDto Get(string id)
+        public IHttpActionResult Get(string id)
         {
+            VerifyGuidType(id);
+
             var user = _usersDomain.Get(new Guid(id));
-            return _mapper.Map<Entity.User, UserDto>(user);
+            if (user == null)
+                ThrowNotFound(id);
+
+            var userDto = _mapper.Map<Entity.User, UserDto>(user);
+            return Ok(userDto);
         }
 
         [HttpPut]
-        public UserDto Update(UserDto userDto)
+        public IHttpActionResult Update(UserDto userDto)
         {
             var user = _mapper.Map<UserDto, Entity.User>(userDto);
 
@@ -65,25 +72,49 @@ namespace UserCrud.WebApi.Controllers
 
             var userDtoUpdated = _mapper.Map<Entity.User, UserDto>(userUpdated);
 
-            return userDtoUpdated;
+            return Ok(userDtoUpdated);
         }
 
         [HttpDelete]
-        public void Delete(string id)
+        public IHttpActionResult Delete(string id)
         {
+            VerifyGuidType(id);
+
             _usersDomain.Delete(new Guid(id));
+            return Ok();
         }
 
         [HttpPost]
-        public UserDto Create(UserDto userDto)
+        public IHttpActionResult Create(UserDto userDto)
         {
             var user = _mapper.Map<UserDto, Entity.User>(userDto);
 
             var userCreated = _usersDomain.Create(user);
 
             var userDtoCreated = _mapper.Map<Entity.User, UserDto>(userCreated);
+            return Created<UserDto>(Request.RequestUri + userDtoCreated.Id.ToString(), userDtoCreated);
+        }
 
-            return userDtoCreated;
+        private void ThrowNotFound(string id)
+        {
+            var message = $"Content [{id}] not found.";
+            throw new HttpResponseException(
+                    Request.CreateErrorResponse(HttpStatusCode.NotFound, message));
+        }
+
+        [DebuggerStepThrough()]
+        private void VerifyGuidType(string id)
+        {
+            try
+            {
+                var x = new Guid(id);
+            }
+            catch (Exception)
+            {
+                var message = $"The parameters must to be a Guid Type and [{id}] is not a Guid";
+                throw new HttpResponseException(
+                                    Request.CreateErrorResponse(HttpStatusCode.BadRequest, message));
+            }
         }
     }
 }
