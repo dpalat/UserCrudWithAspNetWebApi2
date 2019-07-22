@@ -1,6 +1,8 @@
-# UserCrudWithAspNetWebApi2
 
-<img src="https://github.com/dpalat/UserCrudWithAspNetWebApi2/blob/Feature-01/Documentation/logo_transparent.png" width="150px" />
+<p align="center">
+  <img src="https://github.com/dpalat/UserCrudWithAspNetWebApi2/blob/Feature-01/Documentation/logo_transparent.png" width="460px" />
+</p>
+
 
 # User Crud
 
