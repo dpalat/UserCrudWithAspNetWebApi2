@@ -9,6 +9,20 @@
 UserCrudWithAspNetWebApi2 is a project to show an example for a simple User [CRUD](https://es.wikipedia.org/wiki/CRUD) with Asp.Net Web API 2
 In this proyect you can see how to connect a ASP.NET MVC 5 with ASP.NET WebAPI2 with Basic Authentication all in .NET Framework (Full Framework).
 
+
+## How to use it?
+
+1. Clone Repo
+
+2. Open ```.sln``` File in the ```src``` folder  with Visual Studio 2017 or highter
+
+3. Clean and Rebuild all Solution.
+
+3. You must to set the "Multiple startup projects" to start WebUI and WebApi both at the same time.
+
+<img src="https://github.com/dpalat/UserCrudWithAspNetWebApi2/blob/Feature-01/Documentation/multiplestart.png" width="600px" />
+
+
 ## Stack
 
 - Visual Studio 2019
@@ -31,17 +45,6 @@ Others tool:
 - Hatchful (https://hatchful.shopify.com/)
 - ScreenToGif (https://www.screentogif.com/)
 - Trello (https://trello.com/)
-
-
-## How to use it?
-
-1. Clone Repo
-
-2. Open ```.sln``` File in the ```src``` folder  with Visual Studio 2017 or highter
-
-3. You must to set the "Multiple startup projects" to start WebUI and WebApi both at the same time.
-
-<img src="https://github.com/dpalat/UserCrudWithAspNetWebApi2/blob/Feature-01/Documentation/multiplestart.png" width="600px" />
 
 
 ## Default user
