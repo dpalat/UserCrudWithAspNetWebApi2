@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web;
 using UserCrud.WebUI.Dtos;
 
 namespace UserCrud.WebUI.Services
 {
     public interface IUserService
     {
-        Task<List<UserDto>> GetAllUsersAsync();
-        Task<UserDto> GetAsync(string id);
-        Task<UserDto> UpdateAsync(UserDto userDto);
-        Task<UserDto> CreateAsync(UserDto userDto);
-        Task DeleteAsync(string id);
+        Task<List<UserDto>> GetAllUsersAsync(string accessToken);
+
+        Task<UserDto> GetAsync(string id, string accessToken);
+
+        Task<UserDto> UpdateAsync(UserDto userDto, string accessToken);
+
+        Task<UserDto> CreateAsync(UserDto userDto, string accessToken);
+
+        Task DeleteAsync(string id, string accessToken);
     }
 }

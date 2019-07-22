@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using UserCrud.WebUI.Constants;
 using UserCrud.WebUI.Dtos;
@@ -21,7 +22,7 @@ namespace UserCrud.WebUI.Controllers
 
         public async Task<ActionResult> Index()
         {
-            var usersDto = await _userService.GetAllUsersAsync();
+            var usersDto = await _userService.GetAllUsersAsync(GetAccessToken());
 
             var viewModel = new List<UserDetailViewModel>();
             foreach (var userDto in usersDto)
@@ -35,7 +36,7 @@ namespace UserCrud.WebUI.Controllers
         {
             if (string.IsNullOrWhiteSpace(id)) return HttpNotFound();
 
-            var userDto = await _userService.GetAsync(id);
+            var userDto = await _userService.GetAsync(id, GetAccessToken());
             if (userDto == null) return HttpNotFound();
 
             return View(Map(userDto));
@@ -47,7 +48,7 @@ namespace UserCrud.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 var userDto = Map(userViewModel);
-                await _userService.UpdateAsync(userDto);
+                await _userService.UpdateAsync(userDto, GetAccessToken());
                 return RedirectToAction(nameof(Index));
             }
             return View(userViewModel);
@@ -57,7 +58,7 @@ namespace UserCrud.WebUI.Controllers
         {
             if (string.IsNullOrWhiteSpace(id)) return HttpNotFound();
 
-            var userDto = await _userService.GetAsync(id);
+            var userDto = await _userService.GetAsync(id, GetAccessToken());
             if (userDto == null) return HttpNotFound();
 
             return View(Map(userDto));
@@ -68,7 +69,7 @@ namespace UserCrud.WebUI.Controllers
             if (string.IsNullOrWhiteSpace(id))
                 return HttpNotFound();
 
-            await _userService.DeleteAsync(id);
+            await _userService.DeleteAsync(id, GetAccessToken());
             return RedirectToAction(nameof(Index));
         }
 
@@ -83,7 +84,7 @@ namespace UserCrud.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 var userDto = Map(userViewModel);
-                await _userService.CreateAsync(userDto);
+                await _userService.CreateAsync(userDto, GetAccessToken());
                 return RedirectToAction(nameof(Index));
             }
             return View(userViewModel);
@@ -113,6 +114,20 @@ namespace UserCrud.WebUI.Controllers
                 Name = userDto.Name,
                 Roles = roles
             };
+        }
+
+        private string GetAccessToken()
+        {
+            HttpCookie myCookie = Request.Cookies["usercrud-token"];
+
+            string accessToken = "";
+
+            if (!string.IsNullOrEmpty(myCookie.Values["token"]))
+            {
+                accessToken = myCookie.Values["token"].ToString();
+            }
+
+            return accessToken;
         }
     }
 }

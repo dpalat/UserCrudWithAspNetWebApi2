@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http;
 using UserCrud.Domain;
+using UserCrud.WebApi.ApiSecurity;
 using UserCrud.WebApi.Dtos;
+using UserCrud.WebUI.Constants;
 
 namespace UserCrud.WebApi.Controllers
 {
+    [BasicAuthentication(RoleName.ADMIN)]
     public class UsersController : ApiController
     {
         private readonly IUsersDomain _usersDomain;

@@ -158,6 +158,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiSecurity\BasicAuthenticationAttribute.cs" />
+    <Compile Include="ApiSecurity\RoleName.cs" />
     <Compile Include="Configurations\BundleConfig.cs" />
     <Compile Include="Configurations\FilterConfig.cs" />
     <Compile Include="Configurations\IoCConfiguration.cs" />

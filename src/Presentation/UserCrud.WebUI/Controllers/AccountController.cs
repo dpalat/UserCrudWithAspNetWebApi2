@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using UserCrud.WebUI.Models;
 using UserCrud.WebUI.Models.Identity;
 using UserCrud.WebUI.Services;
 using UserCrud.WebUI.ViewModels;
@@ -48,6 +49,8 @@ namespace UserCrud.WebUI.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    SetTokenCookie(model);
+
                     return RedirectToLocal(returnUrl);
 
                 case SignInStatus.LockedOut:
@@ -139,6 +142,15 @@ namespace UserCrud.WebUI.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        private void SetTokenCookie(LoginViewModel model)
+        {
+            var byteArray = Encoding.ASCII.GetBytes($"{model.Email}:{model.Password}");
+            HttpCookie myCookie = new HttpCookie("usercrud-token");
+            myCookie.Values.Add("token", Convert.ToBase64String(byteArray));
+            myCookie.Expires = DateTime.Now.AddHours(12);
+            Response.Cookies.Add(myCookie);
         }
 
         #endregion Helpers
