@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using UserCrud.Domain;
 using UserCrud.WebApi.ApiSecurity;
@@ -21,13 +24,30 @@ namespace UserCrud.WebApi.Controllers
             _mapper = mapper;
         }
 
-        public IEnumerable<UserDto> Get()
+        public HttpResponseMessage Get()
         {
             var users = _usersDomain.GetAll();
 
             var usersDto = _mapper.Map<IEnumerable<Entity.User>, IEnumerable<UserDto>>(users);
 
-            return usersDto;
+            IContentNegotiator negotiator = Configuration.Services.GetContentNegotiator();
+
+            ContentNegotiationResult result = negotiator.Negotiate(
+                usersDto.GetType(), Request, Configuration.Formatters);
+            if (result == null)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+                throw new HttpResponseException(response);
+            }
+
+            return new HttpResponseMessage()
+            {
+                Content = new ObjectContent<IEnumerable<UserDto>>(
+                    usersDto,
+                    result.Formatter,
+                    result.MediaType.MediaType
+                )
+            };
         }
 
         public UserDto Get(string id)
