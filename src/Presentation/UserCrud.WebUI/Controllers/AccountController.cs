@@ -24,8 +24,6 @@ namespace UserCrud.WebUI.Controllers
             _applicationUserManager = new UserManager<ApplicationUser>(new ApplicationUserStore());
         }
 
-        //
-        // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -33,8 +31,6 @@ namespace UserCrud.WebUI.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
@@ -63,38 +59,6 @@ namespace UserCrud.WebUI.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _applicationUserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _authenticationService.SignIn(AuthenticationManager, model.Email, model.Password, false);
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
-            }
-
-            return View(model);
-        }
-
-        //
-        // POST: /Account/LogOff
         [HttpPost]
         public ActionResult LogOff()
         {
@@ -124,14 +88,6 @@ namespace UserCrud.WebUI.Controllers
             get
             {
                 return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError("", error);
             }
         }
 
