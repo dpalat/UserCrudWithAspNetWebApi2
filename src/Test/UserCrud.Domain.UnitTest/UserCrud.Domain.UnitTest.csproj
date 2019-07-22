@@ -62,7 +62,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="AuthenticationDomainTest.cs" />
+    <Compile Include="SeedUserTest.cs" />
+    <Compile Include="HasherTest.cs" />
+    <Compile Include="UsersDomainTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

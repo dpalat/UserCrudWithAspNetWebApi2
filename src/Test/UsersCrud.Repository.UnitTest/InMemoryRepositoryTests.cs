@@ -22,7 +22,7 @@ namespace UsersCrud.Repository.UnitTest
         }
 
         [TestMethod]
-        public void InMemoryRepository_Save_WillAddNewItem()
+        public void When_Save_Then_WillAddNewItem()
         {
             //Arrange
             IRepository<SearchableEntity> repository = new InMemoryRepository<SearchableEntity>();
@@ -37,7 +37,7 @@ namespace UsersCrud.Repository.UnitTest
         }
 
         [TestMethod]
-        public void InMemoryRepository_Save_WillUpdateExistingItem()
+        public void When_Save_Then_WillUpdateExistingItem()
         {
             //Arrange
             IRepository<SearchableEntity> repository = new InMemoryRepository<SearchableEntity>();
@@ -55,7 +55,7 @@ namespace UsersCrud.Repository.UnitTest
         }
 
         [TestMethod]
-        public void InMemoryRepository_Delete_WillRemoveExistingItem()
+        public void When_Delete_Then_WillRemoveExistingItem()
         {
             //Arrange
             IRepository<SearchableEntity> repository = new InMemoryRepository<SearchableEntity>();
@@ -71,7 +71,7 @@ namespace UsersCrud.Repository.UnitTest
         }
 
         [TestMethod]
-        public void InMemoryRepository_FindById_ReturnsCorrectItem()
+        public void When_FindById_Then_ReturnsCorrectItem()
         {
             //Arrange
             IRepository<SearchableEntity> repository = new InMemoryRepository<SearchableEntity>();
