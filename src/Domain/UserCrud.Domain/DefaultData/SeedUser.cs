@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UserCrud.Domain.Cryptography;
 using UserCrud.Entity;
 using UsersCrud.Repository;
 
@@ -8,6 +9,13 @@ namespace UserCrud.Domain.DefaultData
 {
     public class SeedUser : ISeedUser
     {
+        private readonly IHasher _hasher;
+
+        public SeedUser(IHasher hasher)
+        {
+            _hasher = hasher;
+        }
+
         public void Seed(IRepository<User> userRepository)
         {
             var role1 = new List<string> { "PAGE_1" };
@@ -43,7 +51,8 @@ namespace UserCrud.Domain.DefaultData
                 Roles = roles,
                 Name = name,
                 UserEmail = $"{sanitizeName}@user.com",
-                UserName = $"{sanitizeName}@user.com"
+                UserName = $"{sanitizeName}@user.com",
+                PasswordHash = _hasher.CalculateHash("1234")
             };
         }
     }

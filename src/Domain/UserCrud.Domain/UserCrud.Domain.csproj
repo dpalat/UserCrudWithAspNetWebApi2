@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthenticationDomain.cs" />
+    <Compile Include="Cryptography\Hasher.cs" />
+    <Compile Include="Cryptography\IHasher.cs" />
     <Compile Include="DefaultData\SeedUser.cs" />
     <Compile Include="DefaultData\ISeedUser.cs" />
+    <Compile Include="IAuthenticationDomain.cs" />
     <Compile Include="IUsersDomain.cs" />
     <Compile Include="UsersDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

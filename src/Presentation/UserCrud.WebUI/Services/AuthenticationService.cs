@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
@@ -27,23 +28,35 @@ namespace UserCrud.WebUI.Services
         {
             authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
-            var data = new { UserName = email, Password = password };
+            var data = new { UserEmail = email, Password = password };
             var json = JsonConvert.SerializeObject(data);
             var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("Security/LogIn", stringContent);
-            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var signInStatus = SignInStatus.Failure;
+            try
+            {
+                var response = await _httpClient.PostAsync("Security/LogIn", stringContent);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
 
-            var userDto = JsonConvert.DeserializeObject<UserDto>(jsonResponse);
+                    var userDto = JsonConvert.DeserializeObject<UserDto>(jsonResponse);
 
-            var user = new ApplicationUser { UserName = userDto.UserName, Email = userDto.UserEmail };
+                    var user = new ApplicationUser { UserName = userDto.UserName, Email = userDto.UserEmail };
 
-            var identity = await _applicationUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            identity.AddClaims(GetUserClaims(user, userDto.Roles));
+                    var identity = await _applicationUserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    identity.AddClaims(GetUserClaims(user, userDto.Roles));
 
-            authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = rememberMe }, identity);
+                    authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = rememberMe }, identity);
+                    signInStatus = SignInStatus.Success;
+                }
+            }
+            catch (System.Exception e)
+            {
+                Trace.TraceError(e.ToString());
+            }
 
-            return SignInStatus.Success;
+            return signInStatus;
         }
 
         private IEnumerable<Claim> GetUserClaims(ApplicationUser user, List<string> roles)
