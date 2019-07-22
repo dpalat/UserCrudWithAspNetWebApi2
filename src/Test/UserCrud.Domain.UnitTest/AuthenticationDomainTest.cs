@@ -22,7 +22,7 @@ namespace UserCrud.Domain.UnitTest
         }
 
         [TestMethod]
-        public void When_LoginUserWithCorrectPassword_Then_RetunUser()
+        public void When_LoginUserWithCorrectPassword_Then_ReturnUser()
         {
             //Arrange
             var userEmail = "d@d.com";
@@ -46,9 +46,8 @@ namespace UserCrud.Domain.UnitTest
             Assert.IsNotNull(user);
         }
 
-
         [TestMethod]
-        public void When_LoginUserWithIncorrectPassword_Then_RetunNull()
+        public void When_LoginUserWithIncorrectPassword_Then_ReturnNull()
         {
             //Arrange
             var userEmail = "d@d.com";
@@ -58,7 +57,7 @@ namespace UserCrud.Domain.UnitTest
                 new User() { Id = Guid.NewGuid(), UserEmail = userEmail, PasswordHash = passwordHased }
             };
 
-            _hasher.Setup(e => e.CalculateHash(password)).Returns(passwordHased+"old");
+            _hasher.Setup(e => e.CalculateHash(password)).Returns(passwordHased + "old");
             _repository.Setup(e => e.List()).Returns(mockedUsers);
 
             IAuthenticationDomain sut = new AuthenticationDomain(_repository.Object, _hasher.Object);
@@ -71,7 +70,7 @@ namespace UserCrud.Domain.UnitTest
         }
 
         [TestMethod]
-        public void When_EmailIsEmpty_Then_RetunNull()
+        public void When_EmailIsEmpty_Then_ReturnNull()
         {
             //Arrange
             var userEmail = "";
@@ -87,11 +86,32 @@ namespace UserCrud.Domain.UnitTest
         }
 
         [TestMethod]
-        public void When_PasswordIsEmpty_Then_RetunNull()
+        public void When_PasswordIsEmpty_Then_ReturnNull()
         {
             //Arrange
             var userEmail = "d@d.com";
             var password = "";
+
+            IAuthenticationDomain sut = new AuthenticationDomain(_repository.Object, _hasher.Object);
+
+            //Action
+            var user = sut.LogInUser(userEmail, password);
+
+            //Assert
+            Assert.IsNull(user);
+        }
+
+        [TestMethod]
+        public void When_LoginUserDoesntExist_Then_ReturnNull()
+        {
+            //Arrange
+            var userEmail = "d@d.com";
+            var password = "1234";
+            var passwordHased = password + "hased";
+            var mockedUsers = new List<User>();
+
+            _hasher.Setup(e => e.CalculateHash(password)).Returns(passwordHased + "old");
+            _repository.Setup(e => e.List()).Returns(mockedUsers);
 
             IAuthenticationDomain sut = new AuthenticationDomain(_repository.Object, _hasher.Object);
 

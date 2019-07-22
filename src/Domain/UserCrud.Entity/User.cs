@@ -10,7 +10,6 @@ namespace UserCrud.Entity
         public string UserName { get; set; }
         public string UserEmail { get; set; }
         public string Name { get; set; }
-        public string UserToken { get; set; }
         public List<string> Roles { get; set; }
         public string PasswordHash { get; set; }
     }

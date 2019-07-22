@@ -21,10 +21,11 @@ namespace UserCrud.Domain
             if (string.IsNullOrEmpty(userEmail) || string.IsNullOrEmpty(password)) return null;
 
             var user = _userRepository.List().Where(e => e.UserEmail.ToLowerInvariant() == userEmail.ToLowerInvariant()).FirstOrDefault();
+            if (user == null) return null;
 
             var passwordHash = _hasher.CalculateHash(password);
 
-            if (user?.PasswordHash == passwordHash) return user;
+            if (user.PasswordHash == passwordHash) return user;
 
             return null;
         }

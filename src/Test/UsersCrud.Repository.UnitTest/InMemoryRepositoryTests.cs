@@ -44,7 +44,7 @@ namespace UsersCrud.Repository.UnitTest
             var existingItem = new SearchableEntity { Id = Guid.NewGuid(), Name = "ExistingItem" };
             repository.Save(existingItem);
 
-            var itemToBeSaved = new SearchableEntity { Id = Guid.NewGuid(), Name = "ItemToBeSaved" };
+            var itemToBeSaved = new SearchableEntity { Id = existingItem.Id, Name = "ItemToBeSaved" };
 
             //Action
             repository.Save(itemToBeSaved);
@@ -52,6 +52,22 @@ namespace UsersCrud.Repository.UnitTest
             //Assert
             var result = repository.List();
             Assert.IsTrue(result.Contains(itemToBeSaved));
+        }
+
+        [TestMethod]
+        public void When_SaveWithOutID_Then_SetIDAndSave()
+        {
+            //Arrange
+            IRepository<SearchableEntity> repository = new InMemoryRepository<SearchableEntity>();
+
+            var itemToBeSaved = new SearchableEntity { Id = Guid.Empty, Name = "ItemToBeSaved" };
+
+            //Action
+            repository.Save(itemToBeSaved);
+
+            //Assert
+            var result = repository.List();
+            Assert.AreNotEqual(Guid.Empty, result.FirstOrDefault().Id);
         }
 
         [TestMethod]

@@ -20,6 +20,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserCrud.Entity", "Domain\UserCrud.Entity\UserCrud.Entity.csproj", "{C08373CA-2EE4-4DD0-B4A7-2C3A892BA0E5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Test", "4. Test", "{567C62CB-F11A-4158-9192-F31152DBFF2F}"
+	ProjectSection(SolutionItems) = preProject
+		Test\CoverageTest.bat = Test\CoverageTest.bat
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsersCrud.Repository.UnitTest", "Test\UsersCrud.Repository.UnitTest\UsersCrud.Repository.UnitTest.csproj", "{8393EAF9-DFEF-467C-BB88-38F3CD741DAF}"
 EndProject

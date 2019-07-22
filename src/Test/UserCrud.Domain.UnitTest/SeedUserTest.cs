@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using UserCrud.Domain.Cryptography;
 using UserCrud.Domain.DefaultData;
 using UserCrud.Entity;
@@ -52,8 +51,7 @@ namespace UserCrud.Domain.UnitTest
             Assert.IsNotNull(adminUser);
         }
 
-
-        public class FakeRepository<T> : IRepository<T> where T : ISearchable
+        private class FakeRepository<T> : IRepository<T> where T : ISearchable
         {
             private List<T> _fakeStore;
 
