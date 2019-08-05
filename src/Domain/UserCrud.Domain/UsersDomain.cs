@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UserCrud.Domain.Cryptography;
 using UserCrud.Domain.DefaultData;
 using UserCrud.Entity;
 using UsersCrud.Repository;
@@ -9,11 +10,15 @@ namespace UserCrud.Domain
     public class UsersDomain : IUsersDomain
     {
         private readonly IRepository<User> _userRepository;
+        private readonly IHasher _hasher;
+        private const string _default_Password = "1234";
 
-        public UsersDomain(IRepository<User> userRepository, ISeedUser seedUser)
+        public UsersDomain(IRepository<User> userRepository, ISeedUser seedUser, IHasher hasher)
         {
             _userRepository = userRepository;
             seedUser.Seed(_userRepository);
+
+            _hasher = hasher;
         }
 
         public User Get(Guid Id)
@@ -40,6 +45,7 @@ namespace UserCrud.Domain
 
         public User Create(User user)
         {
+            user.PasswordHash = _hasher.CalculateHash(_default_Password);
             _userRepository.Save(user);
 
             return user;
