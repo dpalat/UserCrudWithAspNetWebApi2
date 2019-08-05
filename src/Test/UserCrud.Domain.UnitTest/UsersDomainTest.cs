@@ -3,6 +3,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UserCrud.Domain.Cryptography;
 using UserCrud.Domain.DefaultData;
 using UserCrud.Entity;
 using UsersCrud.Repository;
@@ -14,19 +15,21 @@ namespace UserCrud.Domain.UnitTest
     {
         private Mock<IRepository<User>> _repository;
         private Mock<ISeedUser> _seeder;
+        private Mock<IHasher> _hasher;
 
         [TestInitialize]
         public void TestInitialize()
         {
             _repository = new Mock<IRepository<User>>();
             _seeder = new Mock<ISeedUser>();
+            _hasher = new Mock<IHasher>();
         }
 
         [TestMethod]
         public void When_GetAllWithZeroUsers_Then_RetunAnEmptyResult()
         {
             //Arrange
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
 
             //Action
             var users = sut.GetAll();
@@ -45,7 +48,7 @@ namespace UserCrud.Domain.UnitTest
             };
 
             _repository.Setup(x => x.List()).Returns(mockedUsers);
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
 
             //Action
             var users = sut.GetAll();
@@ -60,7 +63,7 @@ namespace UserCrud.Domain.UnitTest
             //Arrange
             var userMocked = new User() { Id = Guid.NewGuid() };
             _repository.Setup(x => x.FindById(userMocked.Id)).Returns(userMocked);
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
 
             //Action
             var user = sut.Get(userMocked.Id);
@@ -75,7 +78,7 @@ namespace UserCrud.Domain.UnitTest
             //Arrange
             var userMocked = new User() { Id = Guid.NewGuid() };
             _repository.Setup(x => x.FindById(userMocked.Id)).Returns(userMocked);
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
 
             //Action
             var user = sut.Get(userMocked.Id);
@@ -89,7 +92,7 @@ namespace UserCrud.Domain.UnitTest
         {
             //Arrange
             var userMocked = new User() { Id = Guid.NewGuid() };
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
 
             //Action
             sut.Delete(userMocked.Id);
@@ -104,7 +107,9 @@ namespace UserCrud.Domain.UnitTest
             //Arrange
             var userMocked = new User() { Id = Guid.NewGuid() };
             _repository.Setup(x => x.Save(userMocked));
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
+            var passwordHased = "xksdn";
+            _hasher.Setup(e => e.CalculateHash(null)).Returns(passwordHased);
 
             //Action
             sut.Create(userMocked);
@@ -114,12 +119,12 @@ namespace UserCrud.Domain.UnitTest
         }
 
         [TestMethod]
-        public void When_CreateUpdate_Then_CallToSaveInStore()
+        public void When_Update_Then_CallToSaveInStore()
         {
             //Arrange
             var userMocked = new User() { Id = Guid.NewGuid() };
             _repository.Setup(x => x.Save(userMocked));
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
 
             //Action
             sut.Update(userMocked);
@@ -134,7 +139,7 @@ namespace UserCrud.Domain.UnitTest
             //Arrange
 
             //Action
-            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object);
+            IUsersDomain sut = new UsersDomain(_repository.Object, _seeder.Object, _hasher.Object);
 
             //Assert
             _seeder.Verify(e => e.Seed(_repository.Object), Times.Once());
